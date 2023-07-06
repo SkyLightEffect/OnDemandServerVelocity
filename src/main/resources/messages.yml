@@ -1,0 +1,20 @@
+prefix: '[OnDemandServerVelocity]'
+
+# Console message after successful plugin start
+plugin_enabled: '{0} Successfully started'
+
+# Console message after successful plugin shutdown
+plugin_disabled: '{0} Successfully disabled'
+
+# Message send to a player trying to switch to a stopped server
+redirect: 'Server is starting, you''ll be automatically redirected.'
+
+startup:
+  proxy_join: '&2Der &e{0} &2Server wird nun für dich gestartet... Bitte habe einen Moment Geduld und versuche es erneut.'
+  change_server: '&2Der &e{0} &2Server wird nun für dich gestartet. Sobald er verfügbar ist, wirst du weitergeleitet...'
+already_starting:
+  proxy_join: '&cDer &6{0} &cServer wird gerade gestartet... Bitte habe einen Moment Geduld und versuche es erneut.'
+  change_server: '&cDer &7{0} &cServer wird gerade gestartet...'
+
+start_failed: '&4Zeitüberschreitung &7({1}): &7der &c{0} &7Server konnt nicht gestartet werden'
+start_successful: '&2Der &a{0} &2Server wurde erfolgreich gestarted. &7Startdauer: {1}ms'
