@@ -1,0 +1,4 @@
+start_scripts_path: ''
+
+# max startup time in milliseconds
+max_startup_time: 90000

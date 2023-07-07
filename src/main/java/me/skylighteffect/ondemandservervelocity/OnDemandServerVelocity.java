@@ -8,6 +8,7 @@ import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.plugin.annotation.DataDirectory;
 import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.plugin.PluginContainer; // Importiere PluginContainer
+import me.skylighteffect.ondemandservervelocity.configs.MainCFG;
 import me.skylighteffect.ondemandservervelocity.configs.MsgCFG;
 import org.slf4j.Logger;
 
@@ -16,7 +17,7 @@ import java.nio.file.Path;
 @Plugin(
         id = "ondemandservervelocity",
         name = "OnDemandServerVelocity",
-        version = "1.1-SNAPSHOT"
+        version = "1.2-SNAPSHOT"
 )
 public class OnDemandServerVelocity {
 
@@ -26,18 +27,19 @@ public class OnDemandServerVelocity {
     private final PluginContainer pluginContainer;
 
     @Inject
-    public OnDemandServerVelocity(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory, PluginContainer pluginContainer) { // Füge PluginContainer-Parameter hinzu
+    public OnDemandServerVelocity(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory, PluginContainer pluginContainer) {
         this.server = server;
         this.logger = logger;
         this.dataDirectory = dataDirectory;
         this.pluginContainer = pluginContainer;
         MsgCFG.loadConfig(dataDirectory, server, logger);
+        MainCFG.loadConfig(dataDirectory, server, logger);
 
         logger.info(MsgCFG.getContent("plugin_enabled", pluginContainer.getDescription().getVersion()));
     }
 
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent event) {
-        // Hier kannst du weitere Initialisierungen vornehmen
+
     }
 }
