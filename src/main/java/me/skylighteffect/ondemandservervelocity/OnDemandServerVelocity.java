@@ -1,7 +1,6 @@
 package me.skylighteffect.ondemandservervelocity;
 
 import com.google.inject.Inject;
-import com.velocitypowered.api.command.VelocityBrigadierMessage;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.plugin.Plugin;
@@ -10,36 +9,79 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.plugin.PluginContainer; // Importiere PluginContainer
 import me.skylighteffect.ondemandservervelocity.configs.MainCFG;
 import me.skylighteffect.ondemandservervelocity.configs.MsgCFG;
+import me.skylighteffect.ondemandservervelocity.listener.ServerConnectListener;
+import me.skylighteffect.ondemandservervelocity.listener.ServerStartFailedListener;
+import me.skylighteffect.ondemandservervelocity.listener.ServerStartedListener;
+import me.skylighteffect.ondemandservervelocity.util.ServerController;
 import org.slf4j.Logger;
 
+import java.io.File;
 import java.nio.file.Path;
 
 @Plugin(
         id = "ondemandservervelocity",
         name = "OnDemandServerVelocity",
-        version = "1.2-SNAPSHOT"
+        version = "1.3-SNAPSHOT",
+        authors = {"SkyLightEffect"}
 )
 public class OnDemandServerVelocity {
 
-    private final ProxyServer server;
-    private final Logger logger;
-    private final Path dataDirectory;
-    private final PluginContainer pluginContainer;
+    private static ProxyServer server;
+    private static Logger logger;
+    private static Path dataDirectory;
+    private static PluginContainer plugin;
+
+    private static ServerController serverController;
+
+    private static File dataFolder;
 
     @Inject
-    public OnDemandServerVelocity(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory, PluginContainer pluginContainer) {
-        this.server = server;
-        this.logger = logger;
-        this.dataDirectory = dataDirectory;
-        this.pluginContainer = pluginContainer;
+    public OnDemandServerVelocity(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory, PluginContainer plugin) {
+
+        OnDemandServerVelocity.server = server;
+        OnDemandServerVelocity.logger = logger;
+        OnDemandServerVelocity.dataDirectory = dataDirectory;
+        OnDemandServerVelocity.plugin = plugin;
+
+
+        OnDemandServerVelocity.dataFolder = new File(dataDirectory.toFile().getParent() + File.separator + "OnDemandServerVelocity");
+
+        // Write default configuration folder
+        if (!dataFolder.mkdirs())
+            dataFolder.mkdir();
+
         MsgCFG.loadConfig(dataDirectory, server, logger);
         MainCFG.loadConfig(dataDirectory, server, logger);
 
-        logger.info(MsgCFG.getContent("plugin_enabled", pluginContainer.getDescription().getVersion()));
+        serverController = new ServerController(server);
+
+        logger.info(MsgCFG.getContent("plugin_enabled", plugin.getDescription().getVersion()));
     }
 
     @Subscribe
-    public void onProxyInitialization(ProxyInitializeEvent event) {
+    public void onProxyInitialization(ProxyInitializeEvent e) {
+        server.getEventManager().register(plugin, new ServerConnectListener());
+        server.getEventManager().register(plugin, new ServerStartedListener());
+        server.getEventManager().register(plugin, new ServerStartFailedListener());
+    }
 
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    public static ProxyServer getProxyServer() {
+        return server;
+    }
+
+    public static PluginContainer getPlugin() {
+        return plugin;
+    }
+
+    public static ServerController getServerController() {
+        return serverController;
+    }
+
+    public static File getDataFolder() {
+        return dataFolder;
     }
 }

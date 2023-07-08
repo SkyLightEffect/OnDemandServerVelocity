@@ -20,7 +20,7 @@ public class MainCFG {
 
     public static void loadConfig(Path path, ProxyServer proxy, Logger logger) {
         // Determine the path to the target folder ("OnDemandServerVelocity" subfolder)
-        File targetFolder = new File(path.toFile().getParent() + File.separator + "OnDemandServerVelocity");
+        File targetFolder = OnDemandServerVelocity.getDataFolder();
 
         // Check if the target folder already exists
         if (!targetFolder.exists()) {
@@ -65,6 +65,10 @@ public class MainCFG {
         }
 
         return path;
+    }
+
+    public static String getScriptPath() {
+        return getContent("start_scripts_path");
     }
 
     public static long getMaxStartupTimeMillis() {

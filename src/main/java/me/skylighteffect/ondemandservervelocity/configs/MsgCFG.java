@@ -20,13 +20,7 @@ public class MsgCFG {
 
     public static void loadConfig(Path path, ProxyServer proxy, Logger logger) {
         // Determine the path to the target folder ("OnDemandServerVelocity" subfolder)
-        File targetFolder = new File(path.toFile().getParent() + File.separator + "OnDemandServerVelocity");
-
-        // Check if the target folder already exists
-        if (!targetFolder.exists()) {
-            // Create the target folder if it doesn't exist
-            targetFolder.mkdirs();
-        }
+        File targetFolder = OnDemandServerVelocity.getDataFolder();
 
         // Determine the path to the target file inside the target folder
         File targetFile = new File(targetFolder, filename);
