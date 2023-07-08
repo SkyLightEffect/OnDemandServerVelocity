@@ -53,7 +53,7 @@ public class ServerOnDemand {
     }
 
     public ServerStatus getStatus() {
-        if (OnDemandServerVelocity.getProxyServer().getServer(serverInfo.getName()).isEmpty()) {
+        if (!OnDemandServerVelocity.getServerController().isServerStarted(serverInfo)) {
             status = ServerStatus.STOPPED;
         }
         return status;

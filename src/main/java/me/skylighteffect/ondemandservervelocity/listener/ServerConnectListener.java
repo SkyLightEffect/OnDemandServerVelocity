@@ -20,7 +20,7 @@ public class ServerConnectListener {
             return;
         }
 
-        ServerOnDemand server = OnDemandServerVelocity.getServerController().getServer(target);
+        ServerOnDemand server = OnDemandServerVelocity.getServerController().getServer(target.getServerInfo());
         StartingStatus startingStatus = server.start(player);
 
         if (startingStatus == StartingStatus.STARTING) {

@@ -36,9 +36,7 @@ public class Ping {
         // Ping timeout
         if (this.end - this.start > timeout) {
             OnDemandServerVelocity.getLogger().warn("Maximum ping tries for " + server.getServerInfo().getName() + " server reached, aborting.");
-
             OnDemandServerVelocity.getProxyServer().getEventManager().fire(new ServerStartFailedEvent(server, this));
-
             return;
         }
 
