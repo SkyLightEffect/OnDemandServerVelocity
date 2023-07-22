@@ -1,32 +1,39 @@
 package me.skylighteffect.ondemandservervelocity.util;
 
 import com.velocitypowered.api.proxy.Player;
-import com.velocitypowered.api.proxy.server.RegisteredServer;
 import com.velocitypowered.api.proxy.server.ServerInfo;
 import me.skylighteffect.ondemandservervelocity.OnDemandServerVelocity;
 import me.skylighteffect.ondemandservervelocity.configs.MainCFG;
 import me.skylighteffect.ondemandservervelocity.enums.ServerStatus;
 import me.skylighteffect.ondemandservervelocity.enums.StartingStatus;
-import net.kyori.adventure.identity.Identity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServerOnDemand {
     private final ServerInfo serverInfo;
     // private final RegisteredServer server;
     private ServerStatus status;
     private Process process;
-    private Player requester;
+    private final List<Player> requester;
 
     public ServerOnDemand(ServerInfo serverInfo) {
         this.serverInfo = serverInfo;
         this.status = ServerStatus.UNKNOWN;
+        requester = new ArrayList<>();
     }
 
     public StartingStatus start(Player p) {
         StartingStatus status = start();
 
+        /*
         if (status == StartingStatus.STARTING) {
             this.requester = p;
         }
+        */
+
+        requester.add(p);
+
         return status;
     }
 
@@ -63,7 +70,7 @@ public class ServerOnDemand {
         return process;
     }
 
-    public Player getRequester() {
+    public List<Player> getRequester() {
         return requester;
     }
 

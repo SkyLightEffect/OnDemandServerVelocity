@@ -9,6 +9,8 @@ import me.skylighteffect.ondemandservervelocity.enums.ServerStatus;
 import me.skylighteffect.ondemandservervelocity.events.ServerStartedEvent;
 import net.kyori.adventure.text.Component;
 
+import java.util.List;
+
 public class ServerStartedListener {
     @Subscribe
     public void onServerStarted(ServerStartedEvent e) {
@@ -18,15 +20,17 @@ public class ServerStartedListener {
 
         e.getServer().setStatus(ServerStatus.STARTED);
 
-        Player p = e.getServer().getRequester();
+        List<Player> requester = e.getServer().getRequester();
 
-        if (p != null && p.getCurrentServer().isPresent()) {
-            Component message = Component.text(MsgCFG.getContent("start_successful", e.getServer().getServerInfo().getName(), time));
-            p.sendMessage(message);
+        for (Player p : requester) {
+            if (p != null && p.getCurrentServer().isPresent()) {
+                Component message = Component.text(MsgCFG.getContent("start_successful", e.getServer().getServerInfo().getName(), time));
+                p.sendMessage(message);
 
-            RegisteredServer server = OnDemandServerVelocity.getProxyServer().getServer(e.getServer().getServerInfo().getName()).orElse(null);
+                RegisteredServer server = OnDemandServerVelocity.getProxyServer().getServer(e.getServer().getServerInfo().getName()).orElse(null);
 
-            p.createConnectionRequest(server).fireAndForget();
+                p.createConnectionRequest(server).fireAndForget();
+            }
         }
     }
 }
