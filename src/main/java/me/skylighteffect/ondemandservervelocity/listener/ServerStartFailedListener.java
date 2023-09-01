@@ -23,5 +23,7 @@ public class ServerStartFailedListener {
             Component message = Component.text(MsgCFG.getContent("start_failed", e.getServer().getServerInfo().getName(), time));
             p.sendMessage(message);
         }
+
+        e.getServer().clearRequesters();
     }
 }

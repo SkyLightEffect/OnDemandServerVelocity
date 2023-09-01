@@ -31,8 +31,8 @@ public class ServerOnDemand {
             this.requester = p;
         }
         */
-
-        requester.add(p);
+        if (!requester.contains(p))
+            requester.add(p);
 
         return status;
     }
@@ -50,8 +50,8 @@ public class ServerOnDemand {
 
         ProcessBuilder pb = new ProcessBuilder(MainCFG.getScriptPath() + "/" + serverInfo.getName() + "/start.sh");
         try {
-            process = pb.start();
             status = ServerStatus.STARTING;
+            process = pb.start();
             return StartingStatus.STARTING;
         } catch (Exception e) {
             e.printStackTrace();
@@ -60,6 +60,7 @@ public class ServerOnDemand {
     }
 
     public ServerStatus getStatus() {
+        if (status == ServerStatus.STARTING) return status;
         if (!OnDemandServerVelocity.getServerController().isServerStarted(serverInfo)) {
             status = ServerStatus.STOPPED;
         }
@@ -80,5 +81,9 @@ public class ServerOnDemand {
 
     public ServerInfo getServerInfo() {
         return serverInfo;
+    }
+
+    public void clearRequesters() {
+        requester.clear();
     }
 }

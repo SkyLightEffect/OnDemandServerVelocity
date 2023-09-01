@@ -6,7 +6,9 @@ import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
 import me.skylighteffect.ondemandservervelocity.OnDemandServerVelocity;
 import me.skylighteffect.ondemandservervelocity.configs.MsgCFG;
+import me.skylighteffect.ondemandservervelocity.enums.ServerStatus;
 import me.skylighteffect.ondemandservervelocity.enums.StartingStatus;
+import me.skylighteffect.ondemandservervelocity.util.ServerController;
 import me.skylighteffect.ondemandservervelocity.util.ServerOnDemand;
 import net.kyori.adventure.text.Component;
 
@@ -14,32 +16,36 @@ public class ServerConnectListener {
 
     @Subscribe
     public void onServerPreConnect(ServerPreConnectEvent event) {
-        Player player = event.getPlayer();
+        Player p = event.getPlayer();
         RegisteredServer target = event.getResult().getServer().orElse(null);
         if (target == null) {
             return;
         }
 
-        ServerOnDemand server = OnDemandServerVelocity.getServerController().getServer(target.getServerInfo());
-        StartingStatus startingStatus = server.start(player);
+        ServerOnDemand server = OnDemandServerVelocity.getServerController().getServer(target.getServerInfo().getName());
+        if (OnDemandServerVelocity.getServerController().isServerStarted(server.getServerInfo())) {
+            return;
+        }
+
+        StartingStatus startingStatus = server.start(p);
 
         if (startingStatus == StartingStatus.STARTING) {
-            if (player.getCurrentServer().isEmpty()) {
+            if (p.getCurrentServer().isEmpty()) {
                 Component message = Component.text(MsgCFG.getContent("startup.proxy_join", target.getServerInfo().getName()));
-                player.disconnect(message);
+                p.disconnect(message);
             } else {
                 Component message = Component.text(MsgCFG.getContent("startup.change_server", target.getServerInfo().getName()));
-                player.sendMessage(message);
+                p.sendMessage(message);
             }
             event.setResult(ServerPreConnectEvent.ServerResult.denied());
 
         } else if (startingStatus == StartingStatus.ALREADY_STARTING) {
-            if (player.getCurrentServer().isEmpty()) {
+            if (p.getCurrentServer().isEmpty()) {
                 Component message = Component.text(MsgCFG.getContent("already_starting.proxy_join", target.getServerInfo().getName()));
-                player.disconnect(message);
+                p.disconnect(message);
             } else {
                 Component message = Component.text(MsgCFG.getContent("already_starting.change_server", target.getServerInfo().getName()));
-                player.sendMessage(message);
+                p.sendMessage(message);
             }
             event.setResult(ServerPreConnectEvent.ServerResult.denied());
         }

@@ -32,5 +32,7 @@ public class ServerStartedListener {
                 p.createConnectionRequest(server).fireAndForget();
             }
         }
+
+        e.getServer().clearRequesters();
     }
 }
