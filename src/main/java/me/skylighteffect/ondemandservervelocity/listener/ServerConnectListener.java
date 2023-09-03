@@ -6,9 +6,7 @@ import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
 import me.skylighteffect.ondemandservervelocity.OnDemandServerVelocity;
 import me.skylighteffect.ondemandservervelocity.configs.MsgCFG;
-import me.skylighteffect.ondemandservervelocity.enums.ServerStatus;
 import me.skylighteffect.ondemandservervelocity.enums.StartingStatus;
-import me.skylighteffect.ondemandservervelocity.util.ServerController;
 import me.skylighteffect.ondemandservervelocity.util.ServerOnDemand;
 import net.kyori.adventure.text.Component;
 
