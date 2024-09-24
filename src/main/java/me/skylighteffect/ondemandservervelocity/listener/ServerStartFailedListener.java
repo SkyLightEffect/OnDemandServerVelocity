@@ -7,7 +7,8 @@ import me.skylighteffect.ondemandservervelocity.enums.ServerStatus;
 import me.skylighteffect.ondemandservervelocity.events.ServerStartFailedEvent;
 import net.kyori.adventure.text.Component;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ServerStartFailedListener {
 
@@ -17,9 +18,9 @@ public class ServerStartFailedListener {
 
         e.getServer().setStatus(ServerStatus.STOPPED);
 
-        List<Player> requester =  e.getServer().getRequester();
+        Set<Player> requesters = new HashSet<>(e.getServer().getRequesters());
 
-        for (Player p : requester) {
+        for (Player p : requesters) {
             Component message = Component.text(MsgCFG.getContent("start_failed", e.getServer().getServerInfo().getName(), time));
             p.sendMessage(message);
         }

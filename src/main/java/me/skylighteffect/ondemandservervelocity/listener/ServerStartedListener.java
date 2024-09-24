@@ -9,7 +9,8 @@ import me.skylighteffect.ondemandservervelocity.enums.ServerStatus;
 import me.skylighteffect.ondemandservervelocity.events.ServerStartedEvent;
 import net.kyori.adventure.text.Component;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class ServerStartedListener {
     @Subscribe
@@ -20,7 +21,7 @@ public class ServerStartedListener {
 
         e.getServer().setStatus(ServerStatus.STARTED);
 
-        List<Player> requester = e.getServer().getRequester();
+        Set<Player> requester = new HashSet<>(e.getServer().getRequesters());
 
         for (Player p : requester) {
             if (p != null && p.getCurrentServer().isPresent()) {

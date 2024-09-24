@@ -9,9 +9,13 @@ public class ServerStartedEvent {
     private final Ping ping;
 
     public ServerStartedEvent(ServerOnDemand server, Ping ping) {
-        this.ping = ping;
+        if (server == null || ping == null) {
+            throw new IllegalArgumentException("Server and ping must not be null");
+        }
         this.server = server;
+        this.ping = ping;
     }
+
 
     public ServerOnDemand getServer() {
         return this.server;

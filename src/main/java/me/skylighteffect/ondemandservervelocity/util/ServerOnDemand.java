@@ -12,32 +12,25 @@ import java.util.List;
 
 public class ServerOnDemand {
     private final ServerInfo serverInfo;
-    // private final RegisteredServer server;
     private ServerStatus status;
     private Process process;
-    private final List<Player> requester;
+    private final List<Player> requesters;
 
     public ServerOnDemand(ServerInfo serverInfo) {
         this.serverInfo = serverInfo;
         this.status = ServerStatus.UNKNOWN;
-        requester = new ArrayList<>();
+        this.requesters = new ArrayList<>();
     }
 
-    public StartingStatus start(Player p) {
-        StartingStatus status = start();
-
-        /*
-        if (status == StartingStatus.STARTING) {
-            this.requester = p;
+    public StartingStatus start(Player player) {
+        if (!requesters.contains(player)) {
+            requesters.add(player);
         }
-        */
-        if (!requester.contains(p))
-            requester.add(p);
 
-        return status;
+        return initiateStartProcess();
     }
 
-    private StartingStatus start() {
+    private StartingStatus initiateStartProcess() {
         switch (getStatus()) {
             case STARTED:
                 return StartingStatus.ALREADY_STARTED;
@@ -45,24 +38,29 @@ public class ServerOnDemand {
                 return StartingStatus.ALREADY_STARTING;
         }
 
-        // Ping server until it is started
+        startServerProcess();
+        return StartingStatus.STARTING;
+    }
+
+    private void startServerProcess() {
         OnDemandServerVelocity.getProxyServer().getScheduler().buildTask(OnDemandServerVelocity.getPlugin(), () -> new Ping(this)).schedule();
 
         ProcessBuilder pb = new ProcessBuilder(MainCFG.getScriptPath() + "/" + serverInfo.getName() + "/start.sh");
-        OnDemandServerVelocity.getLogger().warn("Execute {}/{}/start.sh", MainCFG.getScriptPath(), serverInfo.getName());
+        OnDemandServerVelocity.getLogger().warn("Executing: {}/start.sh for server: {}", MainCFG.getScriptPath(), serverInfo.getName());
 
         try {
             status = ServerStatus.STARTING;
             process = pb.start();
-            return StartingStatus.STARTING;
+            OnDemandServerVelocity.getLogger().info("Server {} is starting...", serverInfo.getName());
         } catch (Exception e) {
-            e.printStackTrace();
-            return StartingStatus.UNKNOWN;
+            OnDemandServerVelocity.getLogger().error("Failed to start server: {}", serverInfo.getName(), e);
+            status = ServerStatus.STOPPED; // Update status to stopped on failure
         }
     }
 
     public ServerStatus getStatus() {
         if (status == ServerStatus.STARTING) return status;
+
         if (!OnDemandServerVelocity.getServerController().isServerStarted(serverInfo)) {
             status = ServerStatus.STOPPED;
         }
@@ -73,8 +71,8 @@ public class ServerOnDemand {
         return process;
     }
 
-    public List<Player> getRequester() {
-        return requester;
+    public List<Player> getRequesters() {
+        return requesters;
     }
 
     public void setStatus(ServerStatus status) {
@@ -86,6 +84,6 @@ public class ServerOnDemand {
     }
 
     public void clearRequesters() {
-        requester.clear();
+        requesters.clear();
     }
 }

@@ -31,8 +31,9 @@ public class MsgCFG {
                 Files.copy(inputStream, targetFile.toPath());
                 System.out.println("The messages.yml file has been successfully copied.");
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.error("Failed to load configuration from {}", targetFile.getPath(), e);
             }
+
         } else {
             System.out.println("The messages.yml file already exists in the target folder.");
         }

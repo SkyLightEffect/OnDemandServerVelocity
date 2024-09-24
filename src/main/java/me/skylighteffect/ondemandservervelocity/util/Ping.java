@@ -13,8 +13,8 @@ public class Ping {
     private static final long PING_INTERVAL = 100;
     private final ServerOnDemand server;
     private final long timeout;
-    private final long start;
-    private long end;
+    private final long startTime;
+    private long endTime;
 
     public Ping(ServerOnDemand server) {
         this(server, MAX_STARTUP_TIME);
@@ -23,14 +23,13 @@ public class Ping {
     public Ping(ServerOnDemand server, long timeout) {
         this.server = server;
         this.timeout = timeout;
-        this.start = this.end = System.currentTimeMillis();
+        this.startTime = this.endTime = System.currentTimeMillis();
         ping();
     }
 
     private void ping() {
-        // Ping timeout
-        if (this.end - this.start > timeout) {
-            OnDemandServerVelocity.getLogger().warn("Maximum ping tries for {} server reached, aborting.", server.getServerInfo().getName());
+        if (hasTimedOut()) {
+            OnDemandServerVelocity.getLogger().warn("Maximum ping attempts reached for {} server, aborting.", server.getServerInfo().getName());
             OnDemandServerVelocity.getProxyServer().getEventManager().fire(new ServerStartFailedEvent(server, this));
             return;
         }
@@ -39,20 +38,28 @@ public class Ping {
 
         proxyServer.getServer(server.getServerInfo().getName()).ifPresent(registeredServer -> {
             registeredServer.ping().whenComplete((serverPing, throwable) -> {
-                end = System.currentTimeMillis();
+                endTime = System.currentTimeMillis();
 
                 if (serverPing != null) {
                     OnDemandServerVelocity.getProxyServer().getEventManager().fire(new ServerStartedEvent(server, this));
-                    return;
                 } else {
-                    OnDemandServerVelocity.getProxyServer().getScheduler().buildTask(OnDemandServerVelocity.getPlugin(), this::ping)
-                            .delay(PING_INTERVAL, TimeUnit.MILLISECONDS).schedule();
+                    OnDemandServerVelocity.getLogger().debug("Ping failed for server {}. Retrying...", server.getServerInfo().getName());
+                    scheduleNextPing();
                 }
             });
         });
     }
 
+    private boolean hasTimedOut() {
+        return (System.currentTimeMillis() - startTime) > timeout;
+    }
+
+    private void scheduleNextPing() {
+        OnDemandServerVelocity.getProxyServer().getScheduler().buildTask(OnDemandServerVelocity.getPlugin(), this::ping)
+                .delay(PING_INTERVAL, TimeUnit.MILLISECONDS).schedule();
+    }
+
     public long getTimeTook() {
-        return this.end - this.start;
+        return this.endTime - this.startTime;
     }
 }
