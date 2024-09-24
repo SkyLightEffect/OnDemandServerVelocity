@@ -1,17 +1,12 @@
 package me.skylighteffect.ondemandservervelocity.util;
 
 import com.velocitypowered.api.proxy.ProxyServer;
-import com.velocitypowered.api.proxy.server.RegisteredServer;
-import com.velocitypowered.api.proxy.server.ServerPing;
 import me.skylighteffect.ondemandservervelocity.OnDemandServerVelocity;
 import me.skylighteffect.ondemandservervelocity.configs.MainCFG;
 import me.skylighteffect.ondemandservervelocity.events.ServerStartFailedEvent;
 import me.skylighteffect.ondemandservervelocity.events.ServerStartedEvent;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.TextComponent;
 
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 
 public class Ping {
     private static final long MAX_STARTUP_TIME = MainCFG.getMaxStartupTimeMillis();
@@ -35,7 +30,7 @@ public class Ping {
     private void ping() {
         // Ping timeout
         if (this.end - this.start > timeout) {
-            OnDemandServerVelocity.getLogger().warn("Maximum ping tries for " + server.getServerInfo().getName() + " server reached, aborting.");
+            OnDemandServerVelocity.getLogger().warn("Maximum ping tries for {} server reached, aborting.", server.getServerInfo().getName());
             OnDemandServerVelocity.getProxyServer().getEventManager().fire(new ServerStartFailedEvent(server, this));
             return;
         }

@@ -2,10 +2,9 @@ package me.skylighteffect.ondemandservervelocity.configs;
 
 import com.velocitypowered.api.proxy.ProxyServer;
 import me.skylighteffect.ondemandservervelocity.OnDemandServerVelocity;
-import ninja.leaping.configurate.ConfigurationNode;
-import ninja.leaping.configurate.loader.ConfigurationLoader;
-import ninja.leaping.configurate.yaml.YAMLConfigurationLoader;
 import org.slf4j.Logger;
+import org.spongepowered.configurate.ConfigurationNode;
+import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,7 +24,7 @@ public class MainCFG {
         // Check if the target folder already exists
         if (!targetFolder.exists()) {
             // Create the target folder if it doesn't exist
-            // targetFolder.mkdirs();
+            targetFolder.mkdirs();
         }
 
         // Determine the path to the target file inside the target folder
@@ -44,8 +43,11 @@ public class MainCFG {
             System.out.println("The messages.yml file already exists in the target folder.");
         }
 
-        // Load config
-        ConfigurationLoader<?> loader = YAMLConfigurationLoader.builder().setFile(targetFile).build();
+        // Load config using the new Configurate API
+        YamlConfigurationLoader loader = YamlConfigurationLoader.builder()
+                .path(targetFile.toPath()) // Use path method in the new API
+                .build();
+
         try {
             config = loader.load();
         } catch (IOException e) {
@@ -54,9 +56,11 @@ public class MainCFG {
     }
 
     public static String getContent(String path, Object... replace) {
-        String content = config.getNode((Object[]) path.split("\\.")).getString();
+        // Access the node using the modern Configurate API
+        ConfigurationNode node = config.node((Object[]) path.split("\\."));
+        String content = node.getString();  // Use getString() to retrieve value
 
-        if (content != null && !content.equals("")) {
+        if (content != null && !content.isEmpty()) {
             String s = MessageFormat.format(content.replace('&', '§'), replace);
             if (!path.equals("prefix")) {
                 s = s.replace("%PREFIX%", MsgCFG.getContent("prefix"));
@@ -72,16 +76,14 @@ public class MainCFG {
     }
 
     public static long getMaxStartupTimeMillis() {
-        String value = config.getNode("max_startup_time").getString();
+        String value = config.node("max_startup_time").getString();  // Use modern node access method
         if (value != null) {
             try {
                 return Long.parseLong(value);
             } catch (NumberFormatException e) {
-                // Error handling if the value cannot be converted to a long
                 e.printStackTrace();
             }
         }
-        // Default value to be returned if the value is not found or cannot be converted
         return 0L;
     }
 }

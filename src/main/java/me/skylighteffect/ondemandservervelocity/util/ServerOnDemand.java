@@ -49,6 +49,8 @@ public class ServerOnDemand {
         OnDemandServerVelocity.getProxyServer().getScheduler().buildTask(OnDemandServerVelocity.getPlugin(), () -> new Ping(this)).schedule();
 
         ProcessBuilder pb = new ProcessBuilder(MainCFG.getScriptPath() + "/" + serverInfo.getName() + "/start.sh");
+        OnDemandServerVelocity.getLogger().warn("Execute {}/{}/start.sh", MainCFG.getScriptPath(), serverInfo.getName());
+
         try {
             status = ServerStatus.STARTING;
             process = pb.start();
