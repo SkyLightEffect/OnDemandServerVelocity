@@ -4,6 +4,7 @@ import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.server.ServerInfo;
 import me.skylighteffect.ondemandservervelocity.OnDemandServerVelocity;
 import me.skylighteffect.ondemandservervelocity.configs.MainCFG;
+import me.skylighteffect.ondemandservervelocity.configs.StatsCFG;
 import me.skylighteffect.ondemandservervelocity.enums.ServerStatus;
 import me.skylighteffect.ondemandservervelocity.enums.StartingStatus;
 
@@ -15,6 +16,7 @@ public class ServerOnDemand {
     private ServerStatus status;
     private Process process;
     private final List<Player> requesters;
+    private long startTime;
 
     public ServerOnDemand(ServerInfo serverInfo) {
         this.serverInfo = serverInfo;
@@ -51,6 +53,7 @@ public class ServerOnDemand {
         try {
             status = ServerStatus.STARTING;
             process = pb.start();
+            startTime = System.currentTimeMillis();
             OnDemandServerVelocity.getLogger().info("Server {} is starting...", serverInfo.getName());
         } catch (Exception e) {
             OnDemandServerVelocity.getLogger().error("Failed to start server: {}", serverInfo.getName(), e);
@@ -86,4 +89,11 @@ public class ServerOnDemand {
     public void clearRequesters() {
         requesters.clear();
     }
+
+    public int getRemainingStartTimeInSeconds() {
+        long avgDuration = StatsCFG.getAvgStartDuration(serverInfo.getName());
+        long elapsedTime = System.currentTimeMillis() - startTime;
+        return (int) ((avgDuration - elapsedTime) / 1000);
+    }
+
 }

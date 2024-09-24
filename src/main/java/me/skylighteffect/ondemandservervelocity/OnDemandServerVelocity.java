@@ -9,6 +9,7 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import com.velocitypowered.api.plugin.PluginContainer; // Importiere PluginContainer
 import me.skylighteffect.ondemandservervelocity.configs.MainCFG;
 import me.skylighteffect.ondemandservervelocity.configs.MsgCFG;
+import me.skylighteffect.ondemandservervelocity.configs.StatsCFG;
 import me.skylighteffect.ondemandservervelocity.listener.ServerConnectListener;
 import me.skylighteffect.ondemandservervelocity.listener.ServerStartFailedListener;
 import me.skylighteffect.ondemandservervelocity.listener.ServerStartedListener;
@@ -21,7 +22,7 @@ import java.nio.file.Path;
 @Plugin(
         id = "ondemandservervelocity",
         name = "OnDemandServerVelocity",
-        version = "1.7-SNAPSHOT",
+        version = "1.10.1-SNAPSHOT",
         authors = {"SkyLightEffect"}
 )
 public class OnDemandServerVelocity {
@@ -52,6 +53,7 @@ public class OnDemandServerVelocity {
 
         MsgCFG.loadConfig(dataDirectory, server, logger);
         MainCFG.loadConfig(dataDirectory, server, logger);
+        StatsCFG.loadConfig(dataDirectory, server, logger);
 
         serverController = new ServerController(server);
 

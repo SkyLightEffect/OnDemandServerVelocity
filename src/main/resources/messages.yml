@@ -1,20 +1,282 @@
 prefix: '[OnDemandServerVelocity]'
 
 # Console message after successful plugin start
-plugin_enabled: '{0} Successfully started'
+# Sent to the console when the plugin is successfully enabled.
+plugin_enabled: '{0} Plugin erfolgreich gestartet.'
 
 # Console message after successful plugin shutdown
-plugin_disabled: '{0} Successfully disabled'
+# Sent to the console when the plugin is successfully disabled.
+plugin_disabled: '{0} Plugin erfolgreich deaktiviert.'
 
-# Message send to a player trying to switch to a stopped server
-redirect: 'Server is starting, you''ll be automatically redirected.'
+# Message sent to a player trying to switch to a server that is still starting up.
+# Informs the player that they will be automatically redirected once the server is ready.
+redirect: 'Server wird gestartet, du wirst automatisch weitergeleitet, sobald er verfügbar ist.'
 
+# Messages sent during server startup process
 startup:
-  proxy_join: '&2Der &e{0} &2Server wird nun für dich gestartet... Bitte habe einen Moment Geduld und versuche es erneut.'
-  change_server: '&2Der &e{0} &2Server wird nun für dich gestartet. Sobald er verfügbar ist, wirst du weitergeleitet...'
-already_starting:
-  proxy_join: '&cDer &6{0} &cServer wird gerade gestartet... Bitte habe einen Moment Geduld und versuche es erneut.'
-  change_server: '&cDer &7{0} &cServer wird gerade gestartet...'
+  # Message when a player joins the proxy and the target server is still starting.
+  proxy_join: '&2Der &e{0}&2 Server wird gestartet... Bitte habe einen Moment Geduld und versuche es in etwa &e{1}s &2erneut.'
 
-start_failed: '&4Zeitüberschreitung &7({1}): &7der &c{0} &7Server konnt nicht gestartet werden'
-start_successful: '&2Der &a{0} &2Server wurde erfolgreich gestarted. &7Startdauer: {1}ms'
+  # Message when a player tries to switch to a server that is still starting.
+  change_server: '&2Der &e{0}&2 Server wird gerade hochgefahren... (voraussichtlich in &e{1}s&2 bereit). Du wirst weitergeleitet, sobald der Server verfügbar ist.'
+
+# Messages sent when the server is already in the process of starting.
+already_starting:
+  # Message when a player joins the proxy and the server is already starting.
+  proxy_join: '&cDer &6{0}&c Server wird bereits hochgefahren... Bitte warte einen Moment und versuche es in etwa &e{1}s &cerneut.'
+
+  # Message when a player tries to switch to a server that is already starting.
+  change_server: '&cDer &7{0}&c Server wird bereits gestartet... Er sollte in ungefähr &6{1}s &cbereit sein. Du wirst automatisch weitergeleitet, sobald er verfügbar ist.'
+
+# Error message when server startup fails due to a timeout
+# Informs the player about the failed attempt.
+start_failed: '&4Zeitüberschreitung &7({1}): &7Der &c{0}&7 Server konnte nicht gestartet werden.'
+
+# Message when the server has successfully started
+# Informs the player that the server is ready and indicates the startup time.
+start_successful: '&2Der &a{0}&2 Server wurde erfolgreich gestartet. Startdauer: &7{1}ms.'
+
+countdown:
+  long_wait:
+    - '&7Während der Server startet, könntest du GTA V starten.'
+    - '&7Der Server hat die Nase voll vom Warten. Er überlegt, ein Nickerchen zu machen.'
+    - '&7Bitte nicht die Stoppuhr anmachen – das könnte ein Marathon werden.'
+    - '&7Der Server lädt seine Lieblings-Songplaylist. Die Wartezeit könnte lang werden!'
+    - '&7Mach eine Kaffeepause – es könnte eine lange Wartezeit werden!'
+    - '&7Hast du schon mal darüber nachgedacht, ein Buch zu lesen? Vielleicht über Wartezeiten?'
+    - '&7Der Server hat einen kleinen Streit mit seiner Hardware. Geduld ist gefragt!'
+    - '&7Der Server hat sich für einen Schönheitsschlaf entschieden. Bald ist er frisch!'
+    - '&7Du könntest in der Zeit einen Drachen zähmen. Falls du einen findest.'
+    - '&7Hast du die letzte Folge deiner Lieblingsserie schon gesehen? Hier gibt''s genug Zeit dafür!'
+    - '&7Der Server hat gerade eine philosophische Diskussion mit sich selbst. Mal sehen, wer gewinnt!'
+    - '&7Der Server denkt ernsthaft darüber nach, eine Selbsthilfegruppe für geduldige Spieler zu gründen.'
+    - '&7Wir haben den Server bei der Kaffeepause erwischt. Vielleicht hat er noch ein Stück Kuchen übrig!'
+    - '&7Wenn Warten eine olympische Disziplin wäre, hättest du jetzt Gold!'
+    - '&7Der Server überlegt, sich eine neue Frisur zuzulegen. Das könnte dauern!'
+    - '&7Ein Geduldsspiel könnte dir helfen – aber der Server hat keine Geduld dafür.'
+    - '&7Laut den neuesten Umfragen: Warten macht dich zum besten Spieler… irgendwann!'
+    - '&7Warte mal, hat der Server einen Urlaub beantragt?'
+    - '&7Wenn der Server einen Keks hätte, wäre er jetzt schon halb aufgegessen!'
+    - '&7Glaubst du, der Server genießt die Aussicht aus dem Fenster?'
+    - '&7Der Server hat gerade einen neuen Job als Schachmeister angenommen. Es könnte dauern…'
+    - '&7Mach eine Umfrage: „Wer hat mehr Geduld, du oder der Server?“'
+    - '&7Der Server hat sich im Wartezimmer verirrt – hilf ihm heraus!'
+    - '&7Der Server überlegt, ein Buch über Wartezeiten zu schreiben. Es wird ein Bestseller!'
+    - '&7Hast du schon das neue Spiel „Warte, bis der Server kommt“ ausprobiert?'
+    - '&7Der Server könnte einen Auftritt bei der Stand-Up-Comedy machen. Warte auf die Pointe!'
+    - '&7Denk daran: Der Server hat gerade einen langen Arbeitstag… oder einen kurzen Schläfchen.'
+    - '&7Der Server macht eine Reise ins Multiversum, aber keine Sorge, er kommt zurück!'
+    - '&7Der Server hat seine „Ich bin nicht bereit“-Mütze aufgesetzt. Geduld ist angesagt!'
+    - '&7Mach eine Liste: „Was man tun kann, während man auf den Server wartet“ – sie wird lang!'
+    - '&7Wenn du schnell einen Kuchen backen kannst, ist der Server vielleicht schneller fertig!'
+    - '&7Der Server macht gerade eine Mütze voll Schlaf. Ich hoffe, er hat einen Wecker!'
+    - '&7Der Server hat ein neues Hobby entdeckt: Warten. Es wird zum Meister!'
+    - '&7Hast du schon die neuesten Witze über Server gehört? Sie sind ziemlich „langsam“!'
+    - '&7Der Server überlegt, einen eigenen Reality-TV-Sender zu starten: „Warten mit Blöcken“!'
+    - '&7Während du wartest, könntest du ein paar Minecraft-Skills üben… oder einen Keks essen.'
+    - '&7Der Server hat einen Aufstand gegen die Zeit ausgerufen. Das könnte länger dauern!'
+    - '&7Du bist jetzt in der „Warte-Hölle“. Keine Sorge, der Server hat einen Plan… irgendwann!'
+    - '&7Der Server denkt über einen neuen Job nach: „Warte-Manager“. Wie läuft’s bei dir?'
+    - '&7Hast du schon mal mit einem Block gesprochen? Sie haben interessante Geschichten zu erzählen!'
+    - '&7Der Server hat beschlossen, einen Entwurf für seine nächste „Warte-Phase“ zu erstellen!'
+    - "Hol dir einen Kaffee, der Server startet bald."
+    - "&7Zeit für eine kurze Pause – der Server braucht noch ein bisschen."
+    - "&7Warum schaust du nicht mal aus dem Fenster? Der Server startet bald!"
+    - "&7Entspann dich, gute Dinge brauchen Zeit. Wie dieser Server."
+    - "&7Dieser Server läuft nicht auf Lichtgeschwindigkeit, aber er kommt bald."
+    - "&7Hol dir Popcorn, es wird spannend."
+    - "&7Vielleicht hast du genug Zeit, um ein Buch anzufangen."
+    - "&7In der Ruhe liegt die Kraft... und in der Zeit liegt der Start des Servers."
+    - "&7Es gibt keinen Grund zur Panik, der Server startet... irgendwann."
+    - "&7Morgen ist auch noch ein Tag. Aber der Server startet vorher."
+    - "&7Zugegeben, das dauert. Aber hey, besser spät als nie."
+    - "&7Der Server nimmt sich die Zeit, die er braucht. Genau wie ein gutes Steak."
+    - "&7In der Zeit könntest du die Raumzeit krümmen. Oder einfach warten."
+    - "&7Es gibt Langstreckenläufe, die schneller sind als dieser Serverstart."
+    - "&7Wir könnten ein Wettrennen machen – Serverstart vs. Schildkröte."
+    - "&7Wie war das noch mit dem Geduldsspiel?"
+    - "&7Noch ein Moment Geduld – oder zwei – vielleicht auch drei."
+    - "&7Während der Server startet, könntest du ein kleines Nickerchen machen."
+    - "&7Während der Server startet, könntest du GTA V starten."
+    - "&7Dieser Server startet im Tempo einer Schnecke, aber er kommt!"
+    - "&7Was lange währt, wird endlich gut. Gilt auch für diesen Server."
+    - "&7Hol tief Luft und entspann dich. Der Server kommt."
+    - "&7Wir nähern uns der Halbzeit... oder vielleicht auch nicht."
+    - "&7Der Server kann's kaum erwarten, dich zu sehen. Er braucht nur noch einen Moment."
+    - "&7Bald geht's los, vielleicht ein guter Moment, um dein Inventar zu ordnen."
+    - "&7Dieser Server hat gerade eine kleine Identitätskrise. Er startet aber trotzdem bald."
+    - "&7Zeit, sich mal Gedanken über die Sinnhaftigkeit von Wartezeiten zu machen."
+    - "&7Die Spannung steigt... langsam, aber sicher."
+    - "&7Dieser Server startet so entspannt, dass man fast neidisch wird."
+    - "&7Es gibt Zeiten, in denen das Warten auf einen Server fast meditativ wirkt."
+    - "&7Der Server ist noch nicht da, aber deine Geduld wird es danken."
+    - "&7Wenn dieser Server startet, wirst du es nicht bereuen."
+    - "&7Vielleicht noch einen Moment der inneren Einkehr – dann startet der Server."
+    - "&7Das dauert nicht mehr lange... vielleicht noch ein bisschen."
+    - "&7Es gibt Dinge, die dauern – und dann gibt es diesen Serverstart."
+    - "&7Die Geduld wird dir nicht ausgehen – aber der Server könnte bald kommen."
+    - "&7Ein tiefer Atemzug und der Server ist fast da."
+    - "&7Der Server startet bald, versprochen. Nur noch ein bisschen länger."
+    - "&7Dieser Moment der Stille gehört dem Server, der gleich startet."
+
+  medium_wait:
+    - '&7Zieh schon mal die Rüstung an, {0} ist fast bereit!'
+    - '&7Der Server macht gerade ein Workout. Komm schon, {0}, schneller!'
+    - '&7Der Server hat gerade die perfekten Einstellungen gefunden. Fast fertig!'
+    - '&7Der Server hat einen neuen Anstrich bekommen – der Look ist wichtig!'
+    - '&7Du bist jetzt offiziell der beste Warter! Wie fühlt sich das an?'
+    - '&7Der Server hat gerade das beste Rezept für Langeweile gefunden. Willst du mitkochen?'
+    - '&7Der Server macht eine Umfrage: „Wer hat am längsten gewartet?“ Spoiler: Es bist du!'
+    - '&7Mach dich bereit! Der Server bereitet gerade seinen großen Auftritt vor… mit Konfetti!'
+    - '&7Du solltest dir ein Warte-Passwort überlegen – vielleicht „Geduld“ oder „Wo bleibt der Server?“'
+    - '&7Der Server braucht noch ein paar Minuten – er hat seine Socken nicht gefunden!'
+    - '&7Ein kleiner Reminder: Das Warten ist Teil des Abenteuers. Oder so ähnlich…'
+    - '&7Der Server genießt gerade die Ruhe vor dem Sturm. Oder ist das nur ein Windhauch?'
+    - '&7Hast du einen Snack dabei? Es könnte noch eine Weile dauern…'
+    - '&7Du bist in der Zone des „fast da“ – aber das könnte sich auch noch ändern!'
+    - '&7Wenn der Server ein Haustier hätte, würde es jetzt nicken und sagen: „Ich bin auch schon müde!“'
+    - '&7Du bist jetzt im Club der „fast-aber-nicht-ganz-anwesenden“-Spieler. Willkommen!'
+    - '&7Der Server macht gerade eine Kaffeepause. Genieß die Stille – sie könnte bald vorbei sein!'
+    - '&7Der Server hat gerade einen Motivationskurs für sich selbst gestartet. Drück die Daumen!'
+    - '&7Der Server ist fast so bereit wie du nach einem langen Tag… also sehr bald!'
+    - '&7Der Server hat ein paar letzte Sekunden, um seine Hausaufgaben zu erledigen.'
+    - '&7Du bist jetzt im „Mitte der Wartezeit“-Club. Keine Sorge, es gibt Snacks!'
+    - '&7Der Server hat eine neue Playlist erstellt: „Warten auf den großen Auftritt.“'
+    - '&7Wenn das Warten eine Kunst wäre, wärst du jetzt Picasso!'
+    - '&7Der Server denkt über einen Karrieresprung nach: „Vom Warten zum Spiel!“'
+    - '&7Wenn der Server jetzt einen Scherz machen würde, würde er sagen: „Ich bin fast da!“'
+    - '&7Warte mal, macht der Server jetzt einen Yoga-Kurs? Er scheint echt entspannt zu sein!'
+    - '&7Der Server macht einen Schnelltest für seine Fähigkeiten. Daumen drücken!'
+    - '&7Du bist in der „Warte-Ranger“-Modus! Bereite dich auf das Abenteuer vor!'
+    - '&7Der Server hat eine letzte Runde durch die Blöcke gemacht – gleich ist er bereit!'
+    - '&7Mach dich bereit! Der Server hat seinen Kaffeebecher in der Hand und ist fast da!'
+    - '&7Du bist auf dem besten Weg, der „Warte-Champion“ des Jahres zu werden!'
+    - '&7Der Server hat einen Zeitreisewettbewerb gestartet. Wo bist du jetzt?'
+    - '&7Die Wartezeit ist wie ein gutes Spiel: Es dauert eine Weile, aber es lohnt sich!'
+    - '&7Du solltest einen Warte-Tanz einführen! Wer weiß, vielleicht motiviert es den Server!'
+    - '&7Wenn du einen Superhelden hättest, wäre er jetzt der „Warten-Mann“!'
+    - '&7Der Server hat gerade seinen inneren Frieden gefunden. Bald ist er bereit!'
+    - '&7Denk daran: Die besten Dinge kommen zu denen, die warten. Und warten. Und warten…'
+    - '&7Die Spannung steigt! Der Server könnte jeden Moment durch die Tür platzen!'
+    - "&7Mach dich bereit, {0} kommt gleich!"
+    - "&7Noch ein paar Augenblicke, dann ist der Server da."
+    - "&7Zieh schon mal die Rüstung an, {0} ist fast bereit!"
+    - "&7Der Server hat die Augen aufgemacht und fängt an, sich zu bewegen!"
+    - "&7Spann die Muskeln an, es wird bald losgehen!"
+    - "&7Jetzt wird’s ernst – {0} kommt in Kürze!"
+    - "&7Nervenkitzel pur! Gleich ist der Server bereit."
+    - "&7Fast geschafft, halt durch! Der Server ist gleich da."
+    - "&7Das war der letzte Kaffee – der Server ist wach!"
+    - "&7Nur noch einen Moment Geduld. Fühlst du schon die Vorfreude?"
+    - "&7Er steht fast in den Startlöchern, gleich geht's los!"
+    - "&7Noch ein paar Sekunden, dann ist der Server bereit."
+    - "&7Lass die Spannung steigen – es ist fast soweit!"
+    - "&7Mach dich bereit, es gibt kein Zurück mehr!"
+    - "&7Das Warten hat fast ein Ende, noch ein bisschen Geduld."
+    - "&7Jetzt ist kein guter Moment, die Hände vom Keyboard zu nehmen."
+    - "&7Nur noch kurz den Turbo zünden, dann geht's los!"
+    - "&7Es wird spannend, gleich ist es soweit."
+    - "&7Der Countdown läuft, nur noch ein kleines Stück."
+    - "&7Noch ein Atemzug, dann geht's los."
+    - "&7Spann die Muskeln an, es wird gleich losgehen!"
+    - "&7Mach dich bereit, es ist fast soweit!"
+    - "&7Gleich ist der Moment gekommen, halte durch!"
+    - "&7Noch ein bisschen Geduld, dann startet er."
+    - "&7Alles ist bereit – der Server auch gleich."
+    - "&7Jetzt aber schnell – der Server ist fast fertig."
+    - "&7Nur noch ein letzter Schliff, dann geht's los."
+    - "&7Der Moment ist fast da, mach dich bereit."
+    - "&7Die Vorfreude steigt, gleich startet der Server."
+    - "&7Noch ein Augenblick, dann beginnt das Abenteuer."
+    - "&7Nur noch ein paar Sekunden, dann geht's los."
+    - "&7Halte durch, gleich ist der Server bereit."
+    - "&7Gleich beginnt der Spaß, nur noch ein bisschen Geduld."
+    - "&7Es wird ernst, der Server ist fast fertig."
+    - "&7Noch kurz durchhalten, dann geht's los."
+    - "&7Du kannst es fast schon spüren, der Server kommt."
+    - "&7Nur noch kurz warten, dann startet der Server."
+    - "&7Es dauert nicht mehr lange – gleich ist der Server da."
+    - "&7Die Spannung steigt, der Server ist gleich bereit."
+    - "&7Jetzt ist es gleich soweit – der Server startet!"
+    - "&7Noch ein bisschen Geduld, dann beginnt das Spiel."
+    - "&7Mach dich bereit, es dauert nur noch einen Moment."
+    - "&7Der Countdown läuft, der Server ist fast bereit."
+    - "&7Halte durch, der Server ist gleich bereit."
+    - "&7Die letzten Sekunden zählen, dann geht's los."
+    - "&7Jetzt aber schnell, der Server ist fast da."
+    - "&7Es ist fast soweit, der Server kommt."
+    - "&7Mach dich bereit, der Server startet gleich."
+    - "&7Nur noch ein bisschen Geduld, dann geht's los."
+    - "&7Die Spannung steigt, der Server ist fast da."
+
+  short_wait:
+    - '&7Der Server kann''s kaum erwarten, dich zu sehen. Er ist jeden Moment da.'
+    - '&7Halte durch! Das Abenteuer beginnt in 3, 2, 1…'
+    - '&7Es wird gerade ein Block-Feuerwerk für deinen Eintritt vorbereitet!'
+    - '&7Der Server hat sich mit Energie geladen und ist jedem Moment bereit für Action!'
+    - '&7Fast da! Der Server scharrt mit den Blöcken vor Ungeduld!'
+    - '&7Bereite deine Ausrüstung vor, der Server wird gleich bereit sein!'
+    - '&7Der Server dreht gerade seine letzte Runde – gleich ist er bereit!'
+    - '&7Der Server hat sich gerade aufgerappelt – er ist gleich da!'
+    - '&7Der Countdown läuft: 3, 2, 1… der Server hat die Aufwärmphase beendet!'
+    - '&7Du bist so nah dran, dass du schon die Blöcke riechen kannst!'
+    - '&7Das Abenteuer klopft an die Tür! Lass es herein!'
+    - '&7Der Server hat einen Energieschub bekommen – es geht gleich los!'
+    - '&7Die letzten Vorbereitungen laufen! Halte deine Ausrüstung bereit!'
+    - '&7Der Server hat gerade seine letzten Tänze geübt – gleich geht’s los!'
+    - '&7Schnapp dir deine Ausrüstung – der Server ist gleich bereit für Action!'
+    - '&7Gleich ist es soweit! Die Blöcke können es kaum erwarten!'
+    - '&7Die letzte Runde wird gezählt: 5, 4, 3, 2, 1… und los!'
+    - '&7Der Server kann es kaum erwarten, dir zu zeigen, was er kann!'
+    - '&7Ein kleiner Nachschub an Motivation: Der Server ist gleich bereit für dich!'
+    - '&7Hast du deine Ausrüstung bereit? Das Abenteuer beginnt gleich!'
+    - '&7Nur noch ein paar Sekunden, und der Server kann es kaum erwarten, dich zu sehen!'
+    - '&7Der Server hat seine „Gleich geht’s los“-Mütze aufgesetzt – bereit?'
+    - '&7Halte durch! Der Server hat die letzten Vorbereitungen für deinen großen Auftritt!'
+    - '&7Die Vorfreude ist wie ein Drachen – bereit zum Abheben!'
+    - '&7Gleich ist es soweit! Der Server kann es kaum erwarten, das Abenteuer zu starten!'
+    - '&7Es wird schon ein Block-Feuerwerk vorbereitet, um dich zu begrüßen!'
+    - '&7Der Server hat gerade seine letzten Tänze geübt – gleich bist du im Spiel!'
+    - '&7Der Server hat eine „Nervositäts-Überladung“ – es geht gleich los!'
+    - '&7Bald beginnt das Abenteuer, und der Server kann es kaum erwarten!'
+    - '&7Die letzten Sekunden werden gezählt: „Warten ist fast vorbei!“'
+    - '&7Bereite deine Ausrüstung vor, das Abenteuer steht vor der Tür!'
+    - '&7Der Server ist auf dem Sprung – gleich bist du dabei!'
+    - '&7Bald bist du nicht mehr im Wartezustand, sondern im Abenteuermodus!'
+    - '&7Der Server ist auf dem Weg und könnte jeden Moment klingeln – bereit für das Abenteuer?'
+    - '&7Die letzten Sekunden verrinnen wie Sand in einer Stunde – halt durch!'
+    - '&7Der Server hat gerade seinen letzten Schluck Kaffeekraft genommen – gleich geht’s los!'
+    - '&7Du bist so nah dran, dass du die Blöcke schon flüstern hörst: „Komm rein!“'
+    - '&7Die Zeit läuft ab: 3, 2, 1… Der Server hat das Tor fast für dich geöffnet!'
+    - '&7Halt dich fest! Der Server schwingt gleich die Tür auf – Abenteuer voraus!'
+    - '&7Der Countdown hat begonnen! Bereit für ein unvergessliches Abenteuer?'
+    - '&7Bald wirst du wieder in die Welt eintauchen – der Server kann’s kaum erwarten!'
+    - '&7Der Server ist wie ein Kind an Weihnachten – aufgeregt und bereit für dich!'
+    - "&7Noch ein paar Sekunden... jetzt wirklich!"
+    - "&7In 3... 2... 1... Der Server ist gleich da!"
+    - "&7Gleich da, mach dich bereit für den Start!"
+    - "&7Hörst du das Trommeln? {0} startet in wenigen Sekunden!"
+    - "&7Der Server steht in den Startlöchern. Gleich geht’s los!"
+    - "&7Es wird heiß! Nur noch ein paar Sekunden bis zum Serverstart."
+    - "&7Jetzt aber schnell – noch ein kurzer Moment!"
+    - "&7Zehn... neun... acht... Starten in wenigen Sekunden!"
+    - "&7Hoffentlich bist du bereit – der Server ist es fast!"
+    - "&7Alles klar, Server startet jetzt wirklich gleich. Keine Scherze mehr!"
+    - "&7Nur noch Sekunden trennen dich vom Serverstart!"
+    - "&7Gleich ist es soweit, nur noch kurz durchhalten."
+    - "&7Es sind nur noch Augenblicke bis zum Start."
+    - "&7Mach dich bereit, der Server startet sofort."
+    - "&7In wenigen Sekunden beginnt das Abenteuer!"
+    - "&7Jetzt wird’s spannend, es ist gleich soweit."
+    - "&7Noch ein Moment, dann geht's wirklich los."
+    - "&7Du hast es geschafft, der Server ist gleich da."
+    - "&7Nur noch ein paar Herzschläge, dann startet er."
+    - "&7Der Countdown läuft, nur noch Sekunden."
+    - "&7Mach dich bereit, es dauert nur noch einen Moment."
+    - "&7Die letzten Sekunden zählen, dann geht’s los."
+    - "&7Jetzt aber schnell, der Server ist fast da."
+    - "&7Es ist fast soweit, der Server kommt."
+    - "&7Jetzt wird's ernst, der Start ist gleich da."
+    - "&7Bereit machen für den Startschuss!"
+    - "&7Der letzte Countdown – es geht gleich los."
+    - "&7Die letzten Sekunden brechen an – mach dich bereit."

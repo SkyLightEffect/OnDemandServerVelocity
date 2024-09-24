@@ -12,6 +12,9 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class MsgCFG {
     private static ConfigurationNode config;
@@ -64,5 +67,35 @@ public class MsgCFG {
         }
 
         return path;
+    }
+
+    public enum CountdownWait {
+        LONG,
+        MEDIUM,
+        SHORT
+    }
+
+    public static String getRandomLongWaitMessage(CountdownWait countdownWait, Object... replace) {
+        List<String> messages = new ArrayList<>();
+        try {
+            ConfigurationNode serverNode = config.node("countdown");
+            messages = serverNode.node(countdownWait.toString().toLowerCase() + "_wait").getList(String.class);
+
+            if (messages == null) {
+                return null;
+            } else {
+                int size = messages.size();
+                Random generator = new Random();
+                String content = messages.get(generator.nextInt(size));
+
+                String formattedContent = MessageFormat.format(content.replace('&', '§'), replace);
+                formattedContent = formattedContent.replace("%PREFIX%", MsgCFG.getContent("prefix"));
+
+                return formattedContent;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

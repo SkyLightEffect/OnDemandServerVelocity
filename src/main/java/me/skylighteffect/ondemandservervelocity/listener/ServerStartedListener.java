@@ -5,6 +5,7 @@ import com.velocitypowered.api.proxy.Player;
 import com.velocitypowered.api.proxy.server.RegisteredServer;
 import me.skylighteffect.ondemandservervelocity.OnDemandServerVelocity;
 import me.skylighteffect.ondemandservervelocity.configs.MsgCFG;
+import me.skylighteffect.ondemandservervelocity.configs.StatsCFG;
 import me.skylighteffect.ondemandservervelocity.enums.ServerStatus;
 import me.skylighteffect.ondemandservervelocity.events.ServerStartedEvent;
 import net.kyori.adventure.text.Component;
@@ -26,6 +27,7 @@ public class ServerStartedListener {
         for (Player p : requester) {
             if (p != null && p.getCurrentServer().isPresent()) {
                 Component message = Component.text(MsgCFG.getContent("start_successful", e.getServer().getServerInfo().getName(), time));
+
                 p.sendMessage(message);
 
                 RegisteredServer server = OnDemandServerVelocity.getProxyServer().getServer(e.getServer().getServerInfo().getName()).orElse(null);
@@ -34,6 +36,7 @@ public class ServerStartedListener {
             }
         }
 
+        StatsCFG.saveStartDuration(e.getServer().getServerInfo().getName(), time);
         e.getServer().clearRequesters();
     }
 }
