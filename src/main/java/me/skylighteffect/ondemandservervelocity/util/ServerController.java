@@ -33,22 +33,14 @@ public class ServerController {
         }
     }
 
-    /*
-    public ServerOnDemand getServer(ServerInfo serverInfo) {
-        if (!this.servers.containsKey(serverInfo)) return null;
-        return this.servers.get(serverInfo);
-    }
-     */
-
     public ServerOnDemand getServer(String serverName) {
         if (!this.servers.containsKey(serverName)) return null;
         return this.servers.get(serverName);
     }
 
     public boolean isServerStarted(ServerInfo serverInfo) {
-        // boolean serverRunningOnPort = registeredServer.getPlayersConnected().size() > 0;
 
-        int port = ((InetSocketAddress) serverInfo.getAddress()).getPort();
+        int port = serverInfo.getAddress().getPort();
         boolean serverRunningOnPort = !isAvailable(port);
 
         boolean processRunning = this.getServer(serverInfo.getName()).getProcess() != null && this.getServer(serverInfo.getName()).getProcess().isAlive();
