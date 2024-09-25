@@ -15,45 +15,9 @@ import java.text.MessageFormat;
 
 public class MainCFG {
     private static ConfigurationNode config;
-    private static final String filename = "config.yml";
 
-    public static void loadConfig(Path path, ProxyServer proxy, Logger logger) {
-        // Determine the path to the target folder ("OnDemandServerVelocity" subfolder)
-        File targetFolder = OnDemandServerVelocity.getDataFolder();
-
-        // Check if the target folder already exists
-        if (!targetFolder.exists()) {
-            // Create the target folder if it doesn't exist
-            targetFolder.mkdirs();
-        }
-
-        // Determine the path to the target file inside the target folder
-        File targetFile = new File(targetFolder, filename);
-
-        // Check if the target file already exists
-        if (!targetFile.exists()) {
-            // Copy the messages.yml file from the .jar file to the target folder
-            try (InputStream inputStream = OnDemandServerVelocity.class.getResourceAsStream("/" + filename)) {
-                Files.copy(inputStream, targetFile.toPath());
-                System.out.println("The messages.yml file has been successfully copied.");
-            } catch (IOException e) {
-                logger.error("Failed to load configuration from {}", targetFile.getPath(), e);
-            }
-
-        } else {
-            System.out.println("The messages.yml file already exists in the target folder.");
-        }
-
-        // Load config using the new Configurate API
-        YamlConfigurationLoader loader = YamlConfigurationLoader.builder()
-                .path(targetFile.toPath()) // Use path method in the new API
-                .build();
-
-        try {
-            config = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void init(Logger logger) {
+        config = ConfigLoader.loadConfig("config.yml", logger);
     }
 
     public static String getContent(String path, Object... replace) {

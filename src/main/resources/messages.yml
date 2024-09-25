@@ -280,3 +280,4 @@ countdown:
     - "&7Bereit machen für den Startschuss!"
     - "&7Der letzte Countdown – es geht gleich los."
     - "&7Die letzten Sekunden brechen an – mach dich bereit."
+  finished: "&7Der Server sollte nun hochgefahren sein. Solltest du nicht in Kürze damit verbunden worden sein, hat etwas nicht funktioniert."

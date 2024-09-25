@@ -37,7 +37,7 @@ public class CountdownTask implements Runnable {
         if (remainingTime <= 0) {
             // Stop the task if time is up
             for (Player p : server.getRequesters()) {
-                p.sendMessage(Component.text("Der Server sollte nun verfügbar sein.")); // Notify players
+                p.sendMessage(Component.text(MsgCFG.getContent("countdown.finished"))); // Notify players
             }
             if (task != null) {
                 task.cancel(); // Cancel the scheduled task if it exists

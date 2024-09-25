@@ -16,46 +16,10 @@ import java.util.List;
 
 public class StatsCFG {
     private static ConfigurationNode config;
-    private static final String filename = "stats.yml";
+    private static final String FILE_NAME = "stats.yml";
 
-    public static void loadConfig(Path path, ProxyServer proxy, Logger logger) {
-        // Determine the path to the target folder ("OnDemandServerVelocity" subfolder)
-        File targetFolder = OnDemandServerVelocity.getDataFolder();
-
-        // Check if the target folder already exists
-        if (!targetFolder.exists()) {
-            // Create the target folder if it doesn't exist
-            targetFolder.mkdirs();
-        }
-
-        // Determine the path to the target file inside the target folder
-        File targetFile = new File(targetFolder, filename);
-
-        // Check if the target file already exists
-        if (!targetFile.exists()) {
-            // Copy the stats.yml file from the .jar file to the target folder
-            try (InputStream inputStream = OnDemandServerVelocity.class.getResourceAsStream("/" + filename)) {
-                assert inputStream != null;
-                Files.copy(inputStream, targetFile.toPath());
-                System.out.println("The stats.yml file has been successfully copied.");
-            } catch (IOException e) {
-                logger.error("Failed to load configuration from {}", targetFile.getPath(), e);
-            }
-
-        } else {
-            System.out.println("The stats.yml file already exists in the target folder.");
-        }
-
-        // Load config using the new Configurate API
-        YamlConfigurationLoader loader = YamlConfigurationLoader.builder()
-                .path(targetFile.toPath()) // Use path method in the new API
-                .build();
-
-        try {
-            config = loader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void init(Logger logger) {
+        config = ConfigLoader.loadConfig(FILE_NAME, logger);
     }
 
     // Method to save the start duration of a server
@@ -79,7 +43,7 @@ public class StatsCFG {
 
             // Save the config to file
             YamlConfigurationLoader.builder()
-                    .path(OnDemandServerVelocity.getDataFolder().toPath().resolve(filename))
+                    .path(OnDemandServerVelocity.getDataFolder().toPath().resolve(FILE_NAME))
                     .build()
                     .save(config);
 

@@ -22,7 +22,7 @@ import java.nio.file.Path;
 @Plugin(
         id = "ondemandservervelocity",
         name = "OnDemandServerVelocity",
-        version = "1.10.1-SNAPSHOT",
+        version = "1.10.2-SNAPSHOT",
         authors = {"SkyLightEffect"}
 )
 public class OnDemandServerVelocity {
@@ -51,9 +51,9 @@ public class OnDemandServerVelocity {
         if (!dataFolder.mkdirs())
             dataFolder.mkdir();
 
-        MsgCFG.loadConfig(dataDirectory, server, logger);
-        MainCFG.loadConfig(dataDirectory, server, logger);
-        StatsCFG.loadConfig(dataDirectory, server, logger);
+        MsgCFG.init(logger);
+        MainCFG.init(logger);
+        StatsCFG.init(logger);
 
         serverController = new ServerController(server);
 
