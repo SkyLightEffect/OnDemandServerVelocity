@@ -227,26 +227,19 @@ countdown:
     - '&7Schnapp dir deine Ausrüstung – der Server ist gleich bereit für Action!'
     - '&7Gleich ist es soweit! Die Blöcke können es kaum erwarten!'
     - '&7Die letzte Runde wird gezählt: 5, 4, 3, 2, 1… und los!'
-    - '&7Der Server kann es kaum erwarten, dir zu zeigen, was er kann!'
     - '&7Ein kleiner Nachschub an Motivation: Der Server ist gleich bereit für dich!'
     - '&7Hast du deine Ausrüstung bereit? Das Abenteuer beginnt gleich!'
     - '&7Nur noch ein paar Sekunden, und der Server kann es kaum erwarten, dich zu sehen!'
-    - '&7Der Server hat seine „Gleich geht’s los“-Mütze aufgesetzt – bereit?'
     - '&7Halte durch! Der Server hat die letzten Vorbereitungen für deinen großen Auftritt!'
-    - '&7Die Vorfreude ist wie ein Drachen – bereit zum Abheben!'
     - '&7Gleich ist es soweit! Der Server kann es kaum erwarten, das Abenteuer zu starten!'
-    - '&7Es wird schon ein Block-Feuerwerk vorbereitet, um dich zu begrüßen!'
     - '&7Der Server hat gerade seine letzten Tänze geübt – gleich bist du im Spiel!'
-    - '&7Der Server hat eine „Nervositäts-Überladung“ – es geht gleich los!'
-    - '&7Bald beginnt das Abenteuer, und der Server kann es kaum erwarten!'
     - '&7Die letzten Sekunden werden gezählt: „Warten ist fast vorbei!“'
     - '&7Bereite deine Ausrüstung vor, das Abenteuer steht vor der Tür!'
     - '&7Der Server ist auf dem Sprung – gleich bist du dabei!'
     - '&7Bald bist du nicht mehr im Wartezustand, sondern im Abenteuermodus!'
     - '&7Der Server ist auf dem Weg und könnte jeden Moment klingeln – bereit für das Abenteuer?'
-    - '&7Die letzten Sekunden verrinnen wie Sand in einer Stunde – halt durch!'
     - '&7Der Server hat gerade seinen letzten Schluck Kaffeekraft genommen – gleich geht’s los!'
-    - '&7Du bist so nah dran, dass du die Blöcke schon flüstern hörst: „Komm rein!“'
+    - '&7Du bist so nah dran, dass du die Blöcke schon flüstern hörst'
     - '&7Die Zeit läuft ab: 3, 2, 1… Der Server hat das Tor fast für dich geöffnet!'
     - '&7Halt dich fest! Der Server schwingt gleich die Tür auf – Abenteuer voraus!'
     - '&7Der Countdown hat begonnen! Bereit für ein unvergessliches Abenteuer?'
@@ -260,7 +253,6 @@ countdown:
     - "&7Es wird heiß! Nur noch ein paar Sekunden bis zum Serverstart."
     - "&7Jetzt aber schnell – noch ein kurzer Moment!"
     - "&7Zehn... neun... acht... Starten in wenigen Sekunden!"
-    - "&7Hoffentlich bist du bereit – der Server ist es fast!"
     - "&7Alles klar, Server startet jetzt wirklich gleich. Keine Scherze mehr!"
     - "&7Nur noch Sekunden trennen dich vom Serverstart!"
     - "&7Gleich ist es soweit, nur noch kurz durchhalten."
@@ -277,7 +269,5 @@ countdown:
     - "&7Jetzt aber schnell, der Server ist fast da."
     - "&7Es ist fast soweit, der Server kommt."
     - "&7Jetzt wird's ernst, der Start ist gleich da."
-    - "&7Bereit machen für den Startschuss!"
-    - "&7Der letzte Countdown – es geht gleich los."
     - "&7Die letzten Sekunden brechen an – mach dich bereit."
   finished: "&7Der Server sollte nun hochgefahren sein. Solltest du nicht in Kürze damit verbunden worden sein, hat etwas nicht funktioniert."
