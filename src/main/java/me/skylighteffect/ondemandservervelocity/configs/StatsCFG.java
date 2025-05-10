@@ -1,16 +1,10 @@
 package me.skylighteffect.ondemandservervelocity.configs;
 
-import com.velocitypowered.api.proxy.ProxyServer;
 import me.skylighteffect.ondemandservervelocity.OnDemandServerVelocity;
 import org.slf4j.Logger;
 import org.spongepowered.configurate.ConfigurationNode;
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 

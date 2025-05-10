@@ -2,7 +2,6 @@ package me.skylighteffect.ondemandservervelocity.util;
 
 import com.velocitypowered.api.proxy.Player;
 import me.skylighteffect.ondemandservervelocity.configs.MsgCFG;
-import me.skylighteffect.ondemandservervelocity.configs.StatsCFG;
 import net.kyori.adventure.text.Component;
 import com.velocitypowered.api.scheduler.ScheduledTask;
 

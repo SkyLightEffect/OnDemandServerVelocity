@@ -1,6 +1,5 @@
 package me.skylighteffect.ondemandservervelocity.configs;
 
-import com.velocitypowered.api.proxy.ProxyServer;
 import me.skylighteffect.ondemandservervelocity.OnDemandServerVelocity;
 import org.slf4j.Logger;
 import org.spongepowered.configurate.ConfigurationNode;
@@ -10,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class ConfigLoader {
     public static ConfigurationNode loadConfig(String filename, Logger logger) {

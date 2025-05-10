@@ -6,7 +6,6 @@ import com.velocitypowered.api.proxy.server.ServerInfo;
 import me.skylighteffect.ondemandservervelocity.enums.ServerStatus;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.util.HashMap;
 

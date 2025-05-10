@@ -22,7 +22,7 @@ import java.nio.file.Path;
 @Plugin(
         id = "ondemandservervelocity",
         name = "OnDemandServerVelocity",
-        version = "1.10.2-SNAPSHOT",
+        version = "1.10.3-SNAPSHOT",
         authors = {"SkyLightEffect"}
 )
 public class OnDemandServerVelocity {
