@@ -19,6 +19,11 @@ import org.slf4j.Logger;
 import java.io.File;
 import java.nio.file.Path;
 
+/**
+ * Main class of the OnDemandServerVelocity plugin.
+ * <p>
+ * This plugin starts backend Minecraft servers on demand when a player attempts to connect.
+ */
 @Plugin(
         id = "ondemandservervelocity",
         name = "OnDemandServerVelocity",
@@ -36,6 +41,14 @@ public class OnDemandServerVelocity {
 
     private static File dataFolder;
 
+    /**
+     * Constructor called by Velocity to initialize the plugin.
+     *
+     * @param server        the Velocity proxy server instance
+     * @param logger        the logger for this plugin
+     * @param dataDirectory the base data directory for the plugin's config files
+     * @param plugin        the plugin container for metadata access
+     */
     @Inject
     public OnDemandServerVelocity(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory, PluginContainer plugin) {
 
@@ -44,13 +57,13 @@ public class OnDemandServerVelocity {
         OnDemandServerVelocity.dataDirectory = dataDirectory;
         OnDemandServerVelocity.plugin = plugin;
 
-
+        // Define plugin's working data folder
         OnDemandServerVelocity.dataFolder = new File(dataDirectory.toFile().getParent() + File.separator + "OnDemandServerVelocity");
 
-        // Write default configuration folder
-        if (!dataFolder.mkdirs())
-            dataFolder.mkdir();
+        // Ensure the data directory exists
+        if (!dataFolder.exists()) dataFolder.mkdirs();
 
+        // Initialize configuration files
         MsgCFG.init(logger);
         MainCFG.init(logger);
         StatsCFG.init(logger);
@@ -60,6 +73,12 @@ public class OnDemandServerVelocity {
         logger.info(MsgCFG.getContent("plugin_enabled", plugin.getDescription().getVersion()));
     }
 
+    /**
+     * Called when the proxy server has fully initialized.
+     * Registers all relevant event listeners required by the plugin.
+     *
+     * @param e the initialization event
+     */
     @Subscribe
     public void onProxyInitialization(ProxyInitializeEvent e) {
         server.getEventManager().register(plugin, new ServerConnectListener());
@@ -67,22 +86,37 @@ public class OnDemandServerVelocity {
         server.getEventManager().register(plugin, new ServerStartFailedListener());
     }
 
+    /**
+     * @return the Velocity logger instance used by the plugin
+     */
     public static Logger getLogger() {
         return logger;
     }
 
+    /**
+     * @return the ProxyServer instance
+     */
     public static ProxyServer getProxyServer() {
         return server;
     }
 
+    /**
+     * @return the PluginContainer containing metadata about the plugin
+     */
     public static PluginContainer getPlugin() {
         return plugin;
     }
 
+    /**
+     * @return the controller responsible for managing backend server processes
+     */
     public static ServerController getServerController() {
         return serverController;
     }
 
+    /**
+     * @return the data folder where plugin files are stored
+     */
     public static File getDataFolder() {
         return dataFolder;
     }
